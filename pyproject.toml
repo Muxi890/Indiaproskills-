@@ -1,0 +1,9 @@
+[project]
+name = "indiaproskills"
+version = "0.1.0"
+description = "Sample Indiaproskills- app entrypoint configuration."
+readme = "README.md"
+requires-python = ">=3.8"
+
+[project.scripts]
+app = "app:main"
