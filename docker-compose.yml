@@ -1,0 +1,11 @@
+version: '3.9'
+services:
+  indiapro:
+    build: .
+    container_name: indiaproskills_app
+    restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - .:/app
+    command: python app.py

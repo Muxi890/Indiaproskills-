@@ -1,0 +1,4 @@
+# Base requirements for Indiaproskills-
+# No external dependencies currently needed other than stdlib.
+# Testing utilities:
+pytest>=7.0.0
