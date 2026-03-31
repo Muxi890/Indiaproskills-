@@ -56,7 +56,8 @@ def test_premium_service_upgrade_and_status():
     premium = PremiumService(wallet, subs)
     premium.subscribe_premium("u1", "premium", promo_code="PREMIUM20")
 
-    assert wallet.get_balance("u1") == 50.0
+    # PREMIUM20 gives 20% off the 50.0 plan, deducting 40.0 from balance.
+    assert wallet.get_balance("u1") == 60.0
     assert premium.is_premium("u1")
 
     premium.cancel_premium("u1")
