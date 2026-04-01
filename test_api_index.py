@@ -1,10 +1,11 @@
 from api.index import handler
 
 
-class DummyRequest:
+class DummyRequest(dict):
     def __init__(self, method="GET", path="/"):
-        self.method = method
-        self.path = path
+        super().__init__()
+        self["method"] = method
+        self["path"] = path
 
 
 def test_handler_root_status_ok():
