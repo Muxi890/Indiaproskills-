@@ -1,16 +1,27 @@
-# Updated DummyRequest Class
+from api.index import handler
 
 class DummyRequest:
-    def __init__(self, method, path, **kwargs):
+    def __init__(self, method="GET", path="/"):
         self.method = method
         self.path = path
-        # Initialize attributes from kwargs
-        for key, value in kwargs.items():
-            setattr(self, key, value)
 
-    def __getattr__(self, item):
-        # Define behavior for getattr to return None if attribute doesn't exist
-        return None
 
-    def __repr__(self):
-        return f"DummyRequest(method={self.method}, path={self.path})"
+def test_handler_root_status_ok():
+    req = DummyRequest(method="GET", path="/")
+    response = handler(req)
+    assert response["statusCode"] == 200
+    assert "Indiaproskills" in response["body"]
+
+
+def test_handler_health_endpoint():
+    req = DummyRequest(method="GET", path="/api/health")
+    response = handler(req)
+    assert response["statusCode"] == 200
+    assert "health" in response["body"]
+
+
+def test_handler_method_not_allowed():
+    req = DummyRequest(method="DELETE", path="/")
+    response = handler(req)
+    assert response["statusCode"] == 405
+    assert "error" in response["body"]
