@@ -7,16 +7,16 @@ from __future__ import annotations
 
 
 def _normalize_path(request):
-    path = getattr(request, "path", None)
+    path = request.get("path")
     if not path:
-        url = getattr(request, "url", None)
-        path = getattr(url, "path", "/") if url is not None else "/"
+        url = request.get("url")
+        path = url.get("path", "/") if url else "/"
     return path or "/"
 
 
 def handler(request):
     """HTTP handler for Vercel functions."""
-    method = getattr(request, "method", "GET").upper()
+    method = request.get("method", "GET").upper()
 
     if method not in ("GET", "HEAD", "OPTIONS", "POST"):
         return {
